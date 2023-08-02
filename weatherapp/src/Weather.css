@@ -1,0 +1,108 @@
+.Weather {
+  background: linear-gradient(
+    179.4deg,
+    rgb(146, 221, 219) 31.2%,
+    rgb(236, 167, 219) 90.9%
+  );
+  font-family: "Montserrat", sans-serif;
+  border: 1px solid #6c757d;
+  border-radius: 5px;
+  margin: 50px auto 10px auto;
+  padding: 15px;
+  padding-left: 25px;
+  max-width: 50%;
+}
+
+.Weather .middleSection {
+  display: flex;
+}
+.header {
+  padding-left: 15px;
+  margin-bottom: 5px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.header a {
+  text-decoration: none;
+  color: #000000;
+  transition: all 20ms ease-in-out;
+  padding: 0 5px;
+}
+.header a:hover {
+  color: #134691;
+}
+.MainTemperature {
+  height: fit-content;
+  font-size: 13px;
+  font-weight: 500;
+}
+.MainTemperature .tempNumb {
+  font-size: 25px;
+}
+
+.MainTemperature a {
+  text-decoration: none;
+  color: #000000;
+  transition: all 20ms ease-in-out;
+  padding: 0 5px;
+}
+.MainTemperature a:hover {
+  color: #134691;
+}
+.Humidity {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  padding-right: 0;
+  padding-left: 30px;
+  padding-top: 30px;
+  margin-bottom: 0;
+}
+.Humidity ul {
+  list-style-type: none;
+}
+.timeAndLocation {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  padding-right: 0;
+  padding-left: 100px;
+  padding-top: 30px;
+  margin-bottom: 0;
+}
+.MinandMax {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  padding-right: 0;
+  padding-left: 50px;
+  padding-top: 30px;
+  margin-bottom: 0;
+  position: relative;
+  top: 10px;
+}
+.MinandMax ul {
+  list-style-type: none;
+}
+.FeelsLike {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  padding-right: 0;
+  padding-left: 110px;
+  padding-top: 40px;
+  margin-bottom: 0;
+  position: relative;
+  top: 10px;
+}
+.Pressure {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  padding-right: 0;
+  padding-left: 70px;
+  padding-top: 40px;
+  margin-bottom: 0;
+  position: relative;
+  top: 10px;
+}
