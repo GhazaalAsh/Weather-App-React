@@ -57,9 +57,17 @@ export default function Weather() {
   );
   let header = (
     <div className="header">
-      <a href="./">Paris</a>
-      <a href="./">London</a>
-      <a href="./">New York</a>
+      <div className="row">
+        <div className="col-2">
+          <a href="./">Paris</a>
+        </div>
+        <div className="col-2">
+          <a href="./">London</a>
+        </div>
+        <div className="col-8">
+          <a href="./">New York</a>
+        </div>
+      </div>
     </div>
   );
   return (
@@ -67,39 +75,43 @@ export default function Weather() {
       {header}
       {form}
       <div className="middleSection">
-        <div className="MainTemperature">
-          <div className="mainPrediction">
-            <span className="mainEmoji">
+        <div className="row">
+          <div className="col-4">
+            <div className="MainTemperature">
               <img src={weather.icon} alt={weather.description} />
-            </span>
-            <span className="tempNumb">{Math.round(weather.temperature)}</span>
-            <span className="temperature">
-              <a href="./" className="deactive templink">
-                °C
-              </a>
+
+              <span className="tempNumb">
+                {Math.round(weather.temperature)}
+              </span>
+
+              <a href="./">°C</a>
               <span className="colorChange">|</span>
-              <a href="./" className="templink">
-                °F
-              </a>
-            </span>
+              <a href="./">°F</a>
+            </div>
           </div>
-        </div>
-        <div className="Humidity">
-          <ul>
-            <li>Humidity: {weather.humidity} %</li>
-            <li>
-              Wind: {Math.round(weather.wind)}km/h
-              <span className="windDegree"></span>
-            </li>
-            <li>
-              <span className="description">{weather.description}</span>
-            </li>
-          </ul>
-        </div>
-        <div className="timeAndLocation">
-          <div className="cityName">
-            {" "}
-            {weather.cityName}, {weather.country}
+
+          <div className="col-4">
+            <div className="Humidity">
+              <ul>
+                <li>Humidity: {weather.humidity} %</li>
+                <li>
+                  Wind: {Math.round(weather.wind)}km/h
+                  <span className="windDegree"></span>
+                </li>
+                <li>
+                  <span className="description">{weather.description}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="col-4">
+            <div className="timeAndLocation">
+              <div className="cityName">
+                {" "}
+                {weather.cityName}, {weather.country}
+              </div>
+            </div>
           </div>
         </div>
       </div>
