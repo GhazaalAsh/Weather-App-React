@@ -104,17 +104,18 @@ export default function Weather() {
           </ul>
         </div>
       </div>
-      <div className="middleSection">
-        <div className="MinandMax">
+      <div className="row">
+        <div className="col-4">
+          {" "}
           <ul>
             <li>L: {Math.round(weather.mintemperature)} °C</li>
             <li>H: {Math.round(weather.maxtemperature)} °C</li>
           </ul>
         </div>
-        <div className="FeelsLike">
+        <div className="col-4 handleSpace">
           Feels Like {Math.round(weather.feelsLike)} °C
         </div>
-        <div className="Pressure">Pressure: {weather.pressure} mb</div>
+        <div className="col-4 handleSpace">Pressure: {weather.pressure} mb</div>
       </div>
     </div>
   );
