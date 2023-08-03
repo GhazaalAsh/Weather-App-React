@@ -16,6 +16,7 @@
 .Weather .middleSection {
   display: flex;
 }
+
 .header {
   padding-left: 15px;
   margin-bottom: 5px;
@@ -37,7 +38,7 @@
   font-weight: 500;
 }
 .MainTemperature .tempNumb {
-  font-size: 50px;
+  font-size: 35px;
 }
 
 .MainTemperature a {
@@ -49,26 +50,18 @@
 .MainTemperature a:hover {
   color: #134691;
 }
-.Humidity {
+.row {
   text-align: center;
   font-size: 14px;
   font-weight: 500;
-  padding-right: 0;
-  padding-left: 30px;
-  padding-top: 30px;
-  margin-bottom: 0;
+  padding-top: 10px;
 }
-.Humidity ul {
+.row ul {
   list-style-type: none;
 }
-.timeAndLocation {
-  text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-  padding-right: 0;
-  padding-left: 100px;
-  padding-top: 30px;
-  margin-bottom: 0;
+
+.row .handleSpace {
+  padding-top: 10px;
 }
 .MinandMax {
   text-align: center;
