@@ -78,10 +78,11 @@ export default function Weather() {
         <div className="col-4 MainTemperature">
           <img src={weather.icon} alt={weather.description} />
           <span className="tempNumb">{Math.round(weather.temperature)}</span>
-
-          <a href="./">°C</a>
-          <span className="colorChange">|</span>
-          <a href="./">°F</a>
+          <span className="unit">
+            <a href="./">°C</a>
+            <span className="colorChange">|</span>
+            <a href="./">°F</a>
+          </span>
         </div>
         <div className="col-4 handleSpace">
           {" "}

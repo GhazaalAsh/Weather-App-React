@@ -4,7 +4,7 @@
     rgb(146, 221, 219) 31.2%,
     rgb(236, 167, 219) 90.9%
   );
-  font-family: "Montserrat", sans-serif;
+  font-family: "Libre Baskerville", serif;
   border: 1px solid #6c757d;
   border-radius: 5px;
   margin: 50px auto 10px auto;
@@ -13,49 +13,61 @@
   max-width: 50%;
 }
 
-.header {
+.Weather .header {
   padding-left: 15px;
   margin-bottom: 5px;
   font-size: 13px;
   font-weight: 500;
 }
-.header a {
+.Weather .header a {
   text-decoration: none;
   color: #000000;
   transition: all 20ms ease-in-out;
   padding: 0 5px;
 }
-.header a:hover {
+.Weather .header a:hover {
   color: #134691;
 }
-.MainTemperature {
+
+.weather .unit {
+  position: relative;
+  top: -32px;
   height: fit-content;
   font-size: 13px;
   font-weight: 500;
 }
-.MainTemperature .tempNumb {
+.Weather .tempNumb {
   font-size: 35px;
+  font-weight: 400;
+  line-height: 100px;
+  position: relative;
+  top: 18px;
 }
 
-.MainTemperature a {
+.Weather .unit a {
   text-decoration: none;
   color: #000000;
   transition: all 20ms ease-in-out;
   padding: 0 5px;
 }
-.MainTemperature a:hover {
+.Weather .unit a:hover {
   color: #134691;
 }
-.row {
+.Weather .row {
   text-align: center;
   font-size: 14px;
   font-weight: 500;
   padding-top: 10px;
 }
-.row ul {
+.Weather .row ul {
   list-style-type: none;
 }
 
-.row .handleSpace {
+.Weather .row .handleSpace {
   padding-top: 10px;
+}
+
+.Weather .MainTemperature {
+  position: relative;
+  top: -15px;
 }
