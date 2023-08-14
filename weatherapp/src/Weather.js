@@ -4,7 +4,7 @@ import "./Weather.css";
 
 export default function Weather() {
   const [city, setCity] = useState("");
-  const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState({ ready: false });
   function handleSubmit(event) {
     event.preventDefault();
     let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
@@ -14,6 +14,7 @@ export default function Weather() {
   }
   function displayWeather(response) {
     setWeather({
+      ready: true,
       temperature: response.data.main.temp,
       humidity: response.data.main.humidity,
       wind: response.data.wind.speed,
@@ -70,54 +71,71 @@ export default function Weather() {
       </div>
     </div>
   );
-  return (
-    <div className="Weather">
-      {header}
-      {form}
-      <div className="row">
-        <div className="col-4 MainTemperature">
-          <img src={weather.icon} alt={weather.description} />
-          <span className="tempNumb">{Math.round(weather.temperature)}</span>
-          <span className="unit">
-            <a href="./">°C</a>
-            <span className="colorChange">|</span>
-            <a href="./">°F</a>
-          </span>
+  if (weather.ready) {
+    return (
+      <div className="Weather">
+        {header}
+        {form}
+        <div className="row">
+          <div className="col-4 MainTemperature">
+            <img src={weather.icon} alt={weather.description} />
+            <span className="tempNumb">{Math.round(weather.temperature)}</span>
+            <span className="unit">
+              <a href="./">°C</a>
+              <span className="colorChange">|</span>
+              <a href="./">°F</a>
+            </span>
+          </div>
+          <div className="col-4 handleSpace">
+            {" "}
+            <ul>
+              <li>Humidity: {weather.humidity} %</li>
+              <li>
+                Wind: {Math.round(weather.wind)}km/h
+                <span className="windDegree"></span>
+              </li>
+              <li>
+                <span className="description text-capitalize">
+                  {weather.description}
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div className="col-4 handleSpace">
+            <ul>
+              <li>
+                {weather.cityName}, {weather.country}
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="col-4 handleSpace">
-          {" "}
-          <ul>
-            <li>Humidity: {weather.humidity} %</li>
-            <li>
-              Wind: {Math.round(weather.wind)}km/h
-              <span className="windDegree"></span>
-            </li>
-            <li>
-              <span className="description">{weather.description}</span>
-            </li>
-          </ul>
-        </div>
-        <div className="col-4 handleSpace">
-          <ul>
-            <li>
-              {weather.cityName}, {weather.country}
-            </li>
-          </ul>
+        <div className="row">
+          <div className="col-4">
+            {" "}
+            <ul>
+              <li>L: {Math.round(weather.mintemperature)} °C</li>
+              <li>H: {Math.round(weather.maxtemperature)} °C</li>
+            </ul>
+          </div>
+          <div className="col-4 handleSpace">
+            Feels Like {Math.round(weather.feelsLike)} °C
+          </div>
+          <div className="col-4 handleSpace">
+            Pressure: {weather.pressure} mb
+          </div>
         </div>
       </div>
-      <div className="row">
-        <div className="col-4">
-          {" "}
-          <ul>
-            <li>L: {Math.round(weather.mintemperature)} °C</li>
-            <li>H: {Math.round(weather.maxtemperature)} °C</li>
-          </ul>
-        </div>
-        <div className="col-4 handleSpace">
-          Feels Like {Math.round(weather.feelsLike)} °C
-        </div>
-        <div className="col-4 handleSpace">Pressure: {weather.pressure} mb</div>
+    );
+  } else {
+    const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+    const defaultCity = "Tehran";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${defaultCity}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayWeather);
+    return (
+      <div className="Weather">
+        {header}
+        {form}
       </div>
-    </div>
-  );
+    );
+  }
 }
