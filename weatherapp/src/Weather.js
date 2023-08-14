@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Weather.css";
 
-export default function Weather() {
+export default function Weather(props) {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState({ ready: false });
   function handleSubmit(event) {
@@ -26,7 +26,27 @@ export default function Weather() {
       pressure: response.data.main.pressure,
       cityName: response.data.name,
       country: response.data.sys.country,
+      windDegree: response.data.wind.deg,
     });
+  }
+  function calculateWindDegree(windDegree) {
+    if (windDegree <= 23 || windDegree >= 337) {
+      return "N";
+    } else if (windDegree >= 24 && windDegree <= 68) {
+      return "NE";
+    } else if (windDegree >= 69 && windDegree <= 113) {
+      return "E";
+    } else if (windDegree >= 114 && windDegree <= 158) {
+      return "SE";
+    } else if (windDegree >= 159 && windDegree <= 203) {
+      return "S";
+    } else if (windDegree >= 204 && windDegree <= 248) {
+      return "SW";
+    } else if (windDegree >= 249 && windDegree <= 293) {
+      return "W";
+    } else {
+      return "NW";
+    }
   }
   function updateCity(event) {
     setCity(event.target.value);
@@ -91,8 +111,10 @@ export default function Weather() {
             <ul>
               <li>Humidity: {weather.humidity} %</li>
               <li>
-                Wind: {Math.round(weather.wind)}km/h
-                <span className="windDegree"></span>
+                Wind: {Math.round(weather.wind)} km/h{" "}
+                <span className="windDegree">
+                  {calculateWindDegree(weather.windDegree)}
+                </span>
               </li>
               <li>
                 <span className="description text-capitalize">
@@ -128,8 +150,7 @@ export default function Weather() {
     );
   } else {
     const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-    const defaultCity = "Tehran";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${defaultCity}&appid=${apiKey}&units=metric`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayWeather);
     return (
       <div className="Weather">

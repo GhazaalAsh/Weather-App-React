@@ -31,7 +31,7 @@
 
 .weather .unit {
   position: relative;
-  top: -32px;
+  top: -35px;
   height: fit-content;
   font-size: 13px;
   font-weight: 500;
@@ -68,6 +68,13 @@
 }
 
 .Weather .MainTemperature {
+  padding-left: 0;
   position: relative;
   top: -15px;
+}
+.Weather .windDegree {
+  border: 1px solid #6c757d;
+  border-radius: 5px;
+  padding: 2px 2px 0 2px;
+  font-size: 10px;
 }
