@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import FormattedDate from "./FormattedDate";
 import "./Weather.css";
 
 export default function Weather(props) {
@@ -27,6 +28,7 @@ export default function Weather(props) {
       cityName: response.data.name,
       country: response.data.sys.country,
       windDegree: response.data.wind.deg,
+      date: new Date(response.data.dt * 1000),
     });
   }
   function calculateWindDegree(windDegree) {
@@ -127,6 +129,9 @@ export default function Weather(props) {
             <ul>
               <li>
                 {weather.cityName}, {weather.country}
+              </li>
+              <li>
+                <FormattedDate date={weather.date} />
               </li>
             </ul>
           </div>
