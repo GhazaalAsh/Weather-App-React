@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import FormattedDate from "./FormattedDate";
+import SunRelatedTimes from "./SunRelatedTimes";
 import "./Weather.css";
 
 export default function Weather(props) {
@@ -29,6 +30,8 @@ export default function Weather(props) {
       country: response.data.sys.country,
       windDegree: response.data.wind.deg,
       date: new Date(response.data.dt * 1000),
+      sunrise: new Date(response.data.sys.sunrise * 1000),
+      sunset: new Date(response.data.sys.sunset * 1000),
     });
   }
   function calculateWindDegree(windDegree) {
@@ -99,7 +102,7 @@ export default function Weather(props) {
         {header}
         {form}
         <div className="row">
-          <div className="col-4 MainTemperature">
+          <div className="col-5 MainTemperature">
             <img src={weather.icon} alt={weather.description} />
             <span className="tempNumb">{Math.round(weather.temperature)}</span>
             <span className="unit">
@@ -108,7 +111,7 @@ export default function Weather(props) {
               <a href="./">°F</a>
             </span>
           </div>
-          <div className="col-4 handleSpace">
+          <div className="col-3 handleSpace">
             {" "}
             <ul>
               <li>Humidity: {weather.humidity} %</li>
@@ -133,6 +136,12 @@ export default function Weather(props) {
               <li>
                 <FormattedDate date={weather.date} />
               </li>
+              <li className="SunRelatedTimes">
+                Sunrise: <SunRelatedTimes Time={weather.sunrise} />
+              </li>
+              <li className="SunRelatedTimes">
+                Sunset: <SunRelatedTimes Time={weather.sunset} />
+              </li>
             </ul>
           </div>
         </div>
@@ -156,6 +165,7 @@ export default function Weather(props) {
   } else {
     const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
+    console.log(apiUrl);
     axios.get(apiUrl).then(displayWeather);
     return (
       <div className="Weather">
