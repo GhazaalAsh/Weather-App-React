@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import FormattedDate from "./FormattedDate";
-import SunRelatedTimes from "./SunRelatedTimes";
+import WeatherInfo from "./WeatherInfo";
 import "./Weather.css";
 
 export default function Weather(props) {
@@ -34,24 +33,10 @@ export default function Weather(props) {
       sunset: new Date(response.data.sys.sunset * 1000),
     });
   }
-  function calculateWindDegree(windDegree) {
-    if (windDegree <= 23 || windDegree >= 337) {
-      return "N";
-    } else if (windDegree >= 24 && windDegree <= 68) {
-      return "NE";
-    } else if (windDegree >= 69 && windDegree <= 113) {
-      return "E";
-    } else if (windDegree >= 114 && windDegree <= 158) {
-      return "SE";
-    } else if (windDegree >= 159 && windDegree <= 203) {
-      return "S";
-    } else if (windDegree >= 204 && windDegree <= 248) {
-      return "SW";
-    } else if (windDegree >= 249 && windDegree <= 293) {
-      return "W";
-    } else {
-      return "NW";
-    }
+  function Search() {
+    const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayWeather);
   }
   function updateCity(event) {
     setCity(event.target.value);
@@ -101,72 +86,11 @@ export default function Weather(props) {
       <div className="Weather">
         {header}
         {form}
-        <div className="row">
-          <div className="col-5 MainTemperature">
-            <img src={weather.icon} alt={weather.description} />
-            <span className="tempNumb">{Math.round(weather.temperature)}</span>
-            <span className="unit">
-              <a href="./">°C</a>
-              <span className="colorChange">|</span>
-              <a href="./">°F</a>
-            </span>
-          </div>
-          <div className="col-3 handleSpace">
-            {" "}
-            <ul>
-              <li>Humidity: {weather.humidity} %</li>
-              <li>
-                Wind: {Math.round(weather.wind)} km/h{" "}
-                <span className="windDegree">
-                  {calculateWindDegree(weather.windDegree)}
-                </span>
-              </li>
-              <li>
-                <span className="description text-capitalize">
-                  {weather.description}
-                </span>
-              </li>
-            </ul>
-          </div>
-          <div className="col-4 handleSpace">
-            <ul>
-              <li>
-                {weather.cityName}, {weather.country}
-              </li>
-              <li>
-                <FormattedDate date={weather.date} />
-              </li>
-              <li className="SunRelatedTimes">
-                Sunrise: <SunRelatedTimes Time={weather.sunrise} />
-              </li>
-              <li className="SunRelatedTimes">
-                Sunset: <SunRelatedTimes Time={weather.sunset} />
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-4">
-            {" "}
-            <ul>
-              <li>L: {Math.round(weather.mintemperature)} °C</li>
-              <li>H: {Math.round(weather.maxtemperature)} °C</li>
-            </ul>
-          </div>
-          <div className="col-4 handleSpace">
-            Feels Like {Math.round(weather.feelsLike)} °C
-          </div>
-          <div className="col-4 handleSpace">
-            Pressure: {weather.pressure} mb
-          </div>
-        </div>
+        <WeatherInfo info={weather} />
       </div>
     );
   } else {
-    const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
-    console.log(apiUrl);
-    axios.get(apiUrl).then(displayWeather);
+    Search();
     return (
       <div className="Weather">
         {header}
