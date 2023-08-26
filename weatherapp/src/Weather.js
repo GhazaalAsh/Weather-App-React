@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 import WeatherInfo from "./WeatherInfo";
+import LocationInfo from "./LocationInfo";
 import "./Weather.css";
 
 export default function Weather(props) {
   const [city, setCity] = useState("");
+  const [location, setLocation] = useState({ ready: false });
   const [weather, setWeather] = useState({ ready: false });
   function handleSubmit(event) {
     event.preventDefault();
     let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayWeather);
-    console.log(apiUrl);
   }
   function displayWeather(response) {
     setWeather({
@@ -34,9 +35,22 @@ export default function Weather(props) {
     });
   }
   function Search() {
+    getGeolocation(props.defaultCity);
     const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayWeather);
+  }
+  function displayLoction(response) {
+    setLocation({
+      ready: true,
+      latitude: response.data.results[0].latitude,
+      longitude: response.data.results[0].longitude,
+    });
+  }
+  function getGeolocation(props) {
+    let locationUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${props}&count=1&language=en&format=json`;
+    console.log(locationUrl);
+    axios.get(locationUrl).then(displayLoction);
   }
   function updateCity(event) {
     setCity(event.target.value);
@@ -87,6 +101,7 @@ export default function Weather(props) {
         {header}
         {form}
         <WeatherInfo info={weather} />
+        <LocationInfo info={location} />
       </div>
     );
   } else {
