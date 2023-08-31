@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function SunRelatedTimes(props) {
   let Hour = props.Time.getHours();
   if (Hour < 10) {
